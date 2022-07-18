@@ -1,0 +1,170 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    overflow-x: hidde;
+    
+}
+.navbar {
+    
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    background-color: rgb(255, 255, 255);
+}
+.navbar img {
+    height: 50px;
+    
+}
+.navbar ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0 30px;
+    
+}
+.navbar ul li {
+    list-style: none;
+    padding: 0 25px;
+}
+.body {
+    height: 100vh;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+}
+.intro {
+    text-align: center;
+    padding-top: 50px;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    top: 120px;
+}
+.intro h1 {
+    font-size: 100px;
+    background: linear-gradient(to right, #009dff, #9932cc); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+}
+.intro p {
+    font-size: 20px;
+    color: rgb(113, 108, 108);
+    padding-top: 20px;
+}
+.lottie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+}
+.color {
+    width: 200px;
+    height: 100px;
+    background-color: #9932cc;
+    filter: blur(100px);
+    position: absolute;
+    right: 5px;
+    opacity: 0.6;
+   
+}
+.color1 {
+    width: 200px;
+    height: 100px;
+    background-color: #326acc;
+    filter: blur(100px);
+    position: absolute;
+    left: 5px;
+    bottom: 10px;
+    opacity: 0.6;
+   
+}
+.input {
+    height: 700px;
+    background-color: #1a48bd;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.input-field-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    padding-top: 60px;
+    
+}
+.input-field-form label {
+    text-align: center;
+    color: aliceblue;
+    font-size: 25px;
+}
+.input-field-form input {
+    height: 50px;
+}
+.input-field-form button {
+    height: 40px;
+    background: rgb(16, 99, 223);
+    border: none;
+}
+.features {
+    height: 700px;
+    padding: 0 70px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.features h1 {
+    color: rgb(31, 30, 31);
+    font-size: 70px;
+    display: flex;
+    align-items: center;
+    padding-top: 200px;
+    
+}
+.features  p {
+    color: rgb(58, 60, 60);
+    padding-top: 30px;
+}
+.features-lottie {
+    padding-top:40px ;
+    padding-right: 100px;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 800px) {
+    .navbar ul {
+        display: none;
+    }
+   
+    .intro h1 {
+        font-size: 80px;
+    }
+    .intro p {
+        font-size: 17px;
+    }
+    .features {
+        width: 360px;
+        height: 700px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    
+   }
+    .features h1 {
+        font-size: 50px;
+    }
+    .features-lottie {
+        padding-left:-40px ;
+    }
+}
