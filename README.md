@@ -38,7 +38,7 @@ Before you begin, ensure you have the following installed on your machine:
 2. Navigate to the project directory:
 
    ```bash
-   cd chat-app
+   cd chatapp
    ```
 
 3. Install dependencies:
