@@ -1,71 +1,57 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
-    <title>Front page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Chat App</title>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <img src="images/logo.png" alt="">
-        <ul>
-            <li>About us</li>
-            <li>Contact us</li>
-            <li>Home</li>
-        </ul>
-        <div class="button">
-            h
-        </div>
-    </nav>
-    <div class="body">
-        <div class="lottie">
-            <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_bq485nmk.json" background="transparent"  speed="0.5"  style="width: 1000px; height: 600px;"  autoplay></lottie-player>
-        </div>
-        <div class="intro">
-            <h1>Welcome to Chat Pi</h1>
-            <p>Start a live free chat online with thousands of people of<br> India. It's 100% free & safe.</p>
-        </div>
-        <div class="color"></div>
-        <div class="color1"></div>
-        
-    </div>
-    <div class="input">
-        <div class="lottie-bottom">
-            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_decvxrvx.json" background="transparent"  speed="0.5"  style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+  <div id="chat-container">
+    <div id="messages"></div>
+    <form id="form" action="">
+      <input id="m" autocomplete="off" placeholder="Type your message..." />
+      <button>Send</button>
+    </form>
+  </div>
+  <script>
+    const socket = io();
 
-        </div>
-        
+    // Prompt the user for their name when joining the chat
+    const userName = prompt('Please enter your name:');
+    socket.emit('join', userName);
 
-        <div class="form">
-            <form class="input-field-form" action="#">
-            <label >Enter your name to start</label>
-            <input type="text" placeholder="enter your name" required>
-            <button type="submit">Start Chat</button>
-            </form>
-            
-        </div>
-    
+    // Listen for chat message events
+    socket.on('chat message', (msg) => {
+      const messages = document.getElementById('messages');
+      const div = document.createElement('div');
+      div.classList.add('message-container');
+      if (msg.system) {
+        div.innerHTML = `<div class="system-message">${msg.text}</div>`;
+      } else {
+        div.innerHTML = `
+          <div class="meta">${msg.timestamp} - ${msg.name}</div>
+          <div class="message">${msg.text}</div>
+        `;
+      }
+      messages.appendChild(div);
+      // Scroll to the bottom to show the latest message
+      messages.scrollTop = messages.scrollHeight;
+    });
 
-
-    </div>
-    <div class="features">
-        <div class="features-name">
-            <h1>Building blocks<br> of remarkable<br> experience</h1>
-            <p>The LiveChat Platform empowers you with tools<br>and know-how to chat to peoples.</p>
-
-        </div>
-        
-        <div class="features-lottie">
-            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_wgyajtem.json" background="transparent"  speed="0.5"  style="width: 500px; height: 500px;"  autoplay></lottie-player>
-        </div>
-
-        
-    </div>
-    
-    
-<script src="script.js"></script>
+    // Submit form to send a chat message
+    document.getElementById('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const messageInput = document.getElementById('m');
+      const message = messageInput.value;
+      if (message.trim() !== '') {
+        socket.emit('chat message', { name: userName, text: message });
+        messageInput.value = '';
+      }
+    });
+  </script>
 </body>
 </html>
